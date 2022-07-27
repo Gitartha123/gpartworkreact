@@ -1,24 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Aboutus from "./components/pages/Aboutus";
+import Contactus from "./components/pages/Contactus";
+import Latestdrawing from "./components/pages/drawingalleries/Latestdrawing";
+import DrawingGallery from "./components/pages/DrawingGallery";
+import Packages from "./components/pages/Packages";
+import Prices from "./components/pages/Prices";
+import Footer from "./components/templates/Footer";
+import Header from "./components/templates/Header";
+import Navbar from "./components/templates/Navbar";
+import Slider from "./components/templates/Slider";
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <div className="container-fluid position-relative p-0">
+          <Navbar />
+          <Routes>
+            <Route exact path='/' element={<><Slider /><Latestdrawing /><Prices /></>}></Route>
+            <Route exact path='/aboutus' element={<><Aboutus /><Prices /></>}></Route>
+            <Route exact path='/packages' element={<Packages />}></Route>
+            <Route exact path='/gallery' element={<DrawingGallery />}></Route>
+            <Route exact path='/contactus' element={<Contactus />}></Route>
+          </Routes>
+        </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 
