@@ -4,18 +4,13 @@ import {Link,useLocation} from "react-router-dom";
 
 const Navbar = () => {
   let location = useLocation();
-  const gotoTop = ()=>{
-    window.scrollTo({
-      top: 0, 
-      behavior: 'smooth'
-    });
-  }
+  
   return (
     /**  Navbar & Carousel Start **/
 
     <nav className="navbar navbar-expand-lg navbar-dark px-5 py-3 py-lg-0">
       <a href="index.html" className="navbar-brand p-0">
-        <img className='shadow-lg rounded-circle' src={logo} width="80" height="70" />
+        <img className='shadow-lg rounded-circle' src={logo} width="80" alt="Logo" height="70" />
       </a>
       <h5 className='d-none d-lg-block' style={{ fontWeight: "bold", color: 'orange' }}>GP</h5><h6 className='text-light d-none d-lg-block'>Artwork</h6>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">

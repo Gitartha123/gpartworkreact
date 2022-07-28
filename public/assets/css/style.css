@@ -16,6 +16,7 @@
     margin: 100px auto;
     -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
     animation: sk-rotateplane 1.2s infinite ease-in-out;
+    
 }
 
 @-webkit-keyframes sk-rotateplane {
@@ -48,14 +49,26 @@
 #spinner {
     opacity: 0;
     visibility: hidden;
-    transition: opacity .5s ease-out, visibility 0s linear .5s;
+    /* transition: opacity .5s ease-out, visibility 0s linear .5s; */
     z-index: 99999;
+    animation: hideMe 2s forwards;
+}
+
+@keyframes hideMe{
+    to {
+        width:0;
+        height:0;
+        overflow:hidden;
+        opacity:0;
+        z-index: -1;
+    }
 }
 
 #spinner.show {
     transition: opacity .5s ease-out, visibility 0s linear 0s;
     visibility: visible;
     opacity: 1;
+    
 }
 
 

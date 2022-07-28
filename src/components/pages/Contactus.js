@@ -1,5 +1,6 @@
 import React ,{useEffect}from 'react'
 import Banner from '../templates/Banner'
+import Spinner from '../templates/Spinner';
 
 const Contactus = () => {
     useEffect(() => {
@@ -10,6 +11,7 @@ const Contactus = () => {
     }, [])
     return (
         <div>
+            <Spinner/>
             <Banner title="Contact Us"></Banner>
         </div>
     )

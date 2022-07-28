@@ -1,5 +1,6 @@
-import React , {useEffect}from 'react'
-import Banner from '../templates/Banner'
+import React , {useEffect}from 'react';
+import Banner from '../templates/Banner';
+import Spinner from '../templates/Spinner';
 import Latestdrawing from './drawingalleries/Latestdrawing'
 
 const DrawingGallery = () => {
@@ -11,6 +12,7 @@ const DrawingGallery = () => {
     }, [])
     return (
         <div>
+            <Spinner/>
             <Banner title="Drawing Gallery"></Banner>
             <Latestdrawing></Latestdrawing>
         </div>
