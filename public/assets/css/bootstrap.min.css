@@ -45,6 +45,7 @@
 
 body {
     margin: 0;
+    padding:0;
     font-family: "Rubik", sans-serif;
     font-size: 1rem;
     font-weight: 400;
@@ -603,8 +604,8 @@ progress {
 }
 
 .img-fluid {
-    width: 80%;
-    height: 70%;
+    width: 70%;
+    height: 60%;
 }
 
 .img-thumbnail {
@@ -2693,7 +2694,7 @@ textarea.form-control-lg {
 
 .form-floating>.form-control,
 .form-floating>.form-select {
-    height: calc(3.5rem + 2px);
+    height: calc(3.0rem + 2px);
     padding: 1rem .75rem
 }
 
@@ -2749,7 +2750,7 @@ textarea.form-control-lg {
 
 .input-group {
     position: relative;
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
     align-items: stretch;
     width: 100%
@@ -6048,7 +6049,7 @@ fieldset:disabled .btn {
 
 @media (min-width: 576px) {
     .modal-dialog {
-        max-width: 500px;
+        max-width: 800px;
         margin: 1.75rem auto
     }
 
@@ -6081,13 +6082,13 @@ fieldset:disabled .btn {
 
 .modal-fullscreen {
     width: 100vw;
-    max-width: none;
+    min-width: none;
     height: 100%;
-    margin: 0
+    margin:auto;
 }
 
 .modal-fullscreen .modal-content {
-    height: 100%;
+    height: auto;
     border: 0;
     border-radius: 0
 }

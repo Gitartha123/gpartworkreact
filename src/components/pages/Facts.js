@@ -5,7 +5,6 @@ const Facts = () => {
         <div>
             <div className="container-fluid facts  pt-lg-0">
                 <div className="container py-5 pt-lg-0">
-                    <h1 className='text-light text-center'>Services</h1>
                     <div className="row gx-0">
                     
                         <div className="col-lg-3 wow zoomIn" data-wow-delay="0.1s">
