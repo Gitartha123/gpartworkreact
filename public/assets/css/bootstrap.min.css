@@ -3849,7 +3849,7 @@ fieldset:disabled .btn {
     position: absolute;
     z-index: 1000;
     display: none;
-    min-width: 10rem;
+    /* min-width: 10rem; */
     padding: .5rem 0;
     margin: 0;
     font-size: 1rem;
@@ -8251,6 +8251,9 @@ fieldset:disabled .btn {
     text-align: center !important
 }
 
+.text-right{
+    text-align: right !important;
+}
 .text-decoration-none {
     text-decoration: none !important
 }

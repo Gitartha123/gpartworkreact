@@ -1,9 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect} from 'react';
+import { useSelector } from 'react-redux';
 import slider2 from '../../image/slider/slider2.jpg';
-import slider3 from '../../image/slider/slider3.jpg';
-import slider1 from '../../image/slider/slider1.jpg';
 import Facts from '../pages/Facts';
-import Signup from '../Users/Signup';
 import Spinner from './Spinner';
 
 const Slider = () => {
@@ -14,6 +12,7 @@ const Slider = () => {
         })
     }, [])
 
+    const loginReducers = useSelector(state=>state.loginReducers);
     return (
         <>
             <Spinner />
@@ -28,8 +27,20 @@ const Slider = () => {
                                 <div className="display-1 text-white mb-md-4 animated zoomIn"><span style={{ color: 'orange' }}>GP</span>Artwork
                                     <h6 className='text-small text-light fw-bold fst-italic'>Life on a canvas</h6>
                                 </div>
-                                <a data-bs-toggle="modal" data-bs-target="#signupModal" className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft text-dark fw-bold">Sign Up</a>
-                                <a href="" className="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Login</a>
+                                
+                                {!loginReducers.status ?
+                                <>
+                                    <a data-bs-toggle="modal" data-bs-target="#signupModal" className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft text-dark fw-bold">Sign Up</a>
+                                    <a href="" className="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Login</a>
+                                </>
+                                : 
+                                <>
+                                <a data-bs-toggle="modal" data-bs-target="#signupModal" className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft text-dark fw-bold ">Order Now</a>
+                                    <a href="" className="btn btn-outline-light py-md-3 px-md-5 animated slideInRight">Track Order</a>
+                                </>
+                                    
+                                }
+                               
                             </div>
                             <div className='row d-none d-lg-block'>
                                 <div className="col-lg-12 text-center text-lg-end">
@@ -45,7 +56,6 @@ const Slider = () => {
                     </div>
                 </div>
                 <Facts />
-                <Signup />
             </div>
         </>
 

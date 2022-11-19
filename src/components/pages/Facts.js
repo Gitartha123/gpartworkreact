@@ -20,7 +20,7 @@ const Facts = () => {
                         <div className="col-lg-3 wow zoomIn" data-wow-delay="0.3s">
                             <div className="bg-primary shadow d-flex align-items-center justify-content-center p-4" style={{ height: "150px"}}>
                                 <div className="bg-dark-blue d-flex align-items-center justify-content-center rounded mb-2" style={{width: "60px", height: "60px"}}>
-                                    <i className="fa fa-2x fa-pen text-white"></i>
+                                    <i className="fa fa-2x fa-pencil text-white"></i>
                                 </div>
                                 <div className="ps-4">
                                    

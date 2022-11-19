@@ -36,6 +36,7 @@ const Latestdrawing = () => {
             }
         },
     };
+
     return (
         <>
             <div className="container-fluid  wow fadeInUp " data-wow-delay="0.1s">
@@ -43,15 +44,16 @@ const Latestdrawing = () => {
                     <div className="section-title text-center position-relative pb-3 mb-5 mx-auto" style={{ maxWidth: "600px" }}>
                         <h1 className="mb-0">Latest Drawings</h1>
                     </div>
+
                     <ReactOwlCarousel {...options}>
 
-                        <div className="blog-item bg-dark-blue rounded overflow-hidden" style={{ maxHeight: "50%",minHeight:"50%" }}>
+                        <div className="blog-item bg-dark-blue rounded overflow-hidden" style={{ maxHeight: "30%",minHeight:"30%" }}>
                             <div className="blog-img position-relative text-center overflow-hidden p-3">
                                 <img className="img-fluid shadow-lg" src={pic1} alt="" />
                                 <a className="position-absolute top-0 start-0 bg-orange text-dark rounded-end mt-2 py-1 px-1" href="">01 Jan, 2045</a>
                             </div>
                             <div className="p-1">
-                                <div className="d-flex mb-3 text-orange">
+                                <div className="d-flex mb-3 text-orange p-1">
                                     <small className="me-3"><i className="fa fa-pen text-primary me-2"></i>Pencil sketch on  A4 Sized ivory paper </small>
                                 </div>
                             </div>
@@ -240,11 +242,7 @@ const Latestdrawing = () => {
                     </div> */}
                 </div>
             </div>
-
-
         </>
-
-
     )
 }
 

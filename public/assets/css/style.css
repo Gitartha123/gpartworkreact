@@ -507,9 +507,13 @@ h6,
 }
 
 .blog-img{
-    min-height: 300px;
-    max-height: 300px;
+    /* min-height: 300px;
+    max-height: 300px; */
+    height: fit-content;
+    max-height: 200px;
 }
+
+
 /*** Miscellaneous ***/
 @media (min-width: 991.98px) {
     .facts {
@@ -652,3 +656,32 @@ h6,
   .owl-carousel .next-carousel:hover {
     background-position: -24px -53px;
   }
+
+  password_input{
+    margin-top:-9%;
+    margin-left:90%;
+    position:absolute;
+  }
+
+  fadein{
+    transition: opacity 1s ease;
+  }
+
+  fadeout{
+    opacity: 0;
+    transition: opacity 1s ease;
+  }
+
+  text_cursor{
+    cursor: pointer;
+  }
+
+  .fileinput{
+    border: 1px solid #5ea2e6;
+  }
+
+  .hide_file {
+    position: absolute;
+    z-index: 1000;
+    opacity: 0;
+}

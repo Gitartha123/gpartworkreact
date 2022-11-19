@@ -22,7 +22,7 @@ const Footer = () => {
                     </div>
                 </div>
             </div>
-            <a href="#" className="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i className="bi bi-arrow-up"></i></a>
+            <a href="#" className="btn btn-lg btn-primary btn-lg-square rounded back-to-top"><i className="fa fa-arrow-up"></i></a>
         </div>
 
     )
