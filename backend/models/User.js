@@ -6,30 +6,26 @@ const userSchema = new Schema({
             required: true,
             type: String
         },
-        address: {
-            required : true,
-            type : String
-        },
+
         email: {
             required : true,
             type: String,
             unique: true
         },
-        ph : {
-            required : true,
-            type : Number,
-            unique: true
-        },
+
         password: {
             required: true,
             type: String
         },
-        userphoto:{
-            type: String
-        },
+   
         date: {
             type: Date,
             default: Date.now
+        },
+
+        userphoto:{
+            type:String,
+            default:""
         },
         status:{
             type: Number,

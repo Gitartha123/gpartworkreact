@@ -2,11 +2,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Aboutus from "./components/pages/Aboutus";
+import Artondemand from "./components/pages/Artondemand";
 import Contactus from "./components/pages/Contactus";
 import Latestdrawing from "./components/pages/drawingalleries/Latestdrawing";
 import DrawingGallery from "./components/pages/DrawingGallery";
 import Packages from "./components/pages/Packages";
-import Prices from "./components/pages/Prices";
 import Footer from "./components/templates/Footer";
 import Navbar from "./components/templates/Navbar";
 import Slider from "./components/templates/Slider";
@@ -28,8 +28,8 @@ function App() {
                 <div className="container-fluid position-relative p-sm-0">
                   <Navbar />
                   <Routes>
-                    <Route exact path='/' element={<><Slider /><Latestdrawing /><Prices /></>}></Route>
-                    <Route exact path='/aboutus' element={<><Aboutus /><Prices /></>}></Route>
+                    <Route exact path='/' element={<><Slider /><Artondemand /><Latestdrawing /></>}></Route>
+                    <Route exact path='/aboutus' element={<><Aboutus /><Artondemand /></>}></Route>
                     <Route exact path='/packages' element={<Packages />}></Route>
                     <Route exact path='/gallery' element={<DrawingGallery />}></Route>
                     <Route exact path='/contactus' element={<Contactus />}></Route>

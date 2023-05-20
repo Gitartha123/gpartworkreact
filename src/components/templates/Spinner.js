@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../../image/gpartworklogo.png';
+import logo from '../../image/dibujo.png';
 
 const Spinner = () => {
     return (

@@ -42,7 +42,7 @@ const Latestdrawing = () => {
             <div className="container-fluid  wow fadeInUp " data-wow-delay="0.1s">
                 <div className="container py-5">
                     <div className="section-title text-center position-relative pb-3 mb-5 mx-auto" style={{ maxWidth: "600px" }}>
-                        <h1 className="mb-0">Latest Drawings</h1>
+                        <h1 className="mb-0">Arts on Demand</h1>
                     </div>
 
                     <ReactOwlCarousel {...options}>
@@ -180,6 +180,9 @@ const Latestdrawing = () => {
                                 </div>
                             </div>
                     </ReactOwlCarousel>
+                    <div className='container text-center p-2'>
+                        <a href="quote.html" className="btn btn-primary btn-small text-center py-md-3 px-md-5 me-3 animated slideInLeft text-dark fw-bold">View More</a>
+                    </div>
                     {/* <div className="row g-5">
                         <div className="col-lg-3 wow slideInUp" data-wow-delay="0.3s">
                             <div className="blog-item bg-dark-blue rounded overflow-hidden">

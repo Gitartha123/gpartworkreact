@@ -29,7 +29,7 @@ const Editbasicinfo = () => {
 
   const validation = Yup.object({
     username: Yup.string().required('Please enter your name !!').max(100, 'Maximum character is 100 !!').min(3, 'Minimum character is 3 !!').matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field !!"),
-    address: Yup.string().required('Please enter address !!').max(100, "Maximum character is 100"),
+    email: Yup.string().required("Please enter email Id !!").email("Invalid email Id !!").max(100, "max character is 100 !!"),
   })
 
   const handleSubmit = async (data) => {
@@ -78,10 +78,10 @@ const Editbasicinfo = () => {
             <div className="modal-header my-0">
               <button className='btn btn-success btn-small rounded text-white' data-bs-toggle="modal" data-bs-target="#myprofileModal" data-bs-dismiss="modal" aria-label="Close" ref={ref} onClick={closeEditbasicInfo}><i className='fa fa-arrow-left'></i></button>
               <h3 className='text-white fw-bold text-center'>My Profile</h3>
-              <img className='shadow-lg rounded-circle' src={`http://localhost:5000/images/${loginReducers.userphoto}`} width="60" alt="Logo" height="50" />
+              <img className='shadow-lg rounded-circle' src={`${process.env.REACT_APP_API_URL}/images/${loginReducers.userphoto}`} width="60" alt="Logo" height="50" />
             </div>
 
-            <Formik innerRef={formikRef} enableReinitialize={true} initialValues={{ username: loginReducers.name, address: loginReducers.address }} validationSchema={validation} onSubmit={handleSubmit} >
+            <Formik innerRef={formikRef} enableReinitialize={true} initialValues={{ username: loginReducers.name, email: loginReducers.email }} validationSchema={validation} onSubmit={handleSubmit} >
               {(formik) => {
                 const { values, handleChange, errors } = formik;
                 return (
@@ -106,11 +106,11 @@ const Editbasicinfo = () => {
                           </div>
                           <p></p>
                           <div className='col-sm-2'>
-                            <h6 className='text-orange'>Address:</h6>
+                            <h6 className='text-orange'>Email ID:</h6>
                           </div>
                           <div className='col-sm-10'>
-                            <input type="text" name='address' autoComplete='off' placeholder='Enter your address' value={values.address} onChange={handleChange} className="form-control bg-transparent border-primary  fw-normal text-white" />
-                            <span className='text-danger'>{errors.address}</span>
+                            <input type="text" name='email' autoComplete='off' placeholder='Enter your email ID' value={values.email} onChange={handleChange} className="form-control bg-transparent border-primary  fw-normal text-white" />
+                            <span className='text-danger'>{errors.email}</span>
                           </div>
                         </div>
                       </div>

@@ -34,6 +34,24 @@ export const Logout = ()=> {
      }
 }
 
+export const setLogin = ()=>{
+     return (dispatch)=>{
+          dispatch({
+               type:"setLogin",
+               payload:""
+          })
+     }
+}
+export const setLogout = ()=>{
+     return (dispatch)=>{
+          dispatch({
+               type:"setLogout",
+               payload:""
+          })
+     }
+}
+
+
 
 
  

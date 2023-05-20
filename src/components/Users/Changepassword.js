@@ -16,7 +16,7 @@ const Changepassword = () => {
     const [submitText, setSubmitText] = useState({ text: "Update", disable: "", icon: "fa fa-paint-brush" });
     const loginReducers = useSelector(state => state.loginReducers);
     const context = useContext(UserAuthContext);
-    const { checkCurrentpassword } = context;
+    const { changePassword } = context;
     const ref = useRef();
     const formikRef = useRef();
     const closeChangepassword = () => {
@@ -34,33 +34,30 @@ const Changepassword = () => {
     })
 
     const handleSubmit = async (data) => {
-        // const response = await updateBasicdetails(data);
-        // try {
-        //     setSubmitText({ text: "Updating, Please wait...", disable: "disabled", icon: "fa fa-spinner fa-spin" })
-        //     if (response.status) {
-        //         showAlert('success', 'Updated Successfully !!', '', 'Close');
-        //         ref.current.click();
-        //         Login(response);
-        //         setSubmitText({ text: "Update", disable: "", icon: "fa fa-paint-brush" });
-        //         formikRef.current?.resetForm();
+        const response = await changePassword(data);
+        try {
+            setSubmitText({ text: "Updating, Please wait...", disable: "disabled", icon: "fa fa-spinner fa-spin" })
+            if (response.status) {
+                showAlert('success', 'Password Changed Successfully', '', 'Close');
+                ref.current.click();
+                Login(response);
+                setSubmitText({ text: "Update", disable: "", icon: "fa fa-paint-brush" });
+                formikRef.current?.resetForm();
 
-        //     }
-        //     else {
-        //         var err = response.error;
-        //         showAlert("error", "Error !!", err.toString(), "Close");
-        //         setSubmitText({ text: "Submit", disable: "", icon: "fa fa-paint-brush" });
-        //     }
-        // } catch (error) {
-        //     var err = response.error;
-        //     showAlert("error", "Error !!", err.toString(), "Close");
-        //     setSubmitText({ text: "Submit", disable: "", icon: "fa fa-paint-brush" });
-        // }
+            }
+            else {
+                var err = response.error;
+                showAlert("error", "Error !!", err.toString(), "Close");
+                setSubmitText({ text: "Submit", disable: "", icon: "fa fa-paint-brush" });
+            }
+        } catch (error) {
+            var err = response.error;
+            showAlert("error", "Error !!", err.toString(), "Close");
+            setSubmitText({ text: "Submit", disable: "", icon: "fa fa-paint-brush" });
+        }
 
     }
-    const checkPassword = async (value)=>{
-        const response = await checkCurrentpassword({currentpassword:value});
-        return response.status;
-    }
+
 
 
     const showAlert = (icon, title, text, button) => {
@@ -89,9 +86,9 @@ const Changepassword = () => {
 
                         <Formik innerRef={formikRef} enableReinitialize={true} initialValues={{ currentpassword: "", newpassword: "", confirmpassword: "" }} validationSchema={validation} onSubmit={handleSubmit} >
                             {(formik) => {
-                                const { handleChange, errors } = formik;
-                               
-                               
+                                const { values,handleChange, errors } = formik;
+
+
                                 return (
                                     <Form1>
                                         <div className="modal-body">
@@ -109,7 +106,7 @@ const Changepassword = () => {
                                                         <h6 className='text-orange'>Current Password:</h6>
                                                     </div>
                                                     <div className='col-sm-9'>
-                                                        <input type="text" name='currentpassword' autoComplete='off' placeholder='Enter current password' onChange={handleChange} className="form-control bg-transparent border-primary  fw-normal text-white" />
+                                                        <input type="text" name='currentpassword' autoComplete='off' value={values.currentpassword}  placeholder='Enter current password' onChange={handleChange} className="form-control bg-transparent border-primary  fw-normal text-white" />
                                                         <span className='text-danger'>{errors.currentpassword}</span>
                                                     </div>
                                                     <p></p>
@@ -117,7 +114,7 @@ const Changepassword = () => {
                                                         <h6 className='text-orange'>New Password:</h6>
                                                     </div>
                                                     <div className='col-sm-9'>
-                                                        <input type="text" name='newpassword' autoComplete='off' placeholder='Enter new password' onChange={handleChange} className="form-control bg-transparent border-primary  fw-normal text-white" />
+                                                        <input type="text" name='newpassword' autoComplete='off' value={values.newpassword} placeholder='Enter new password' onChange={handleChange} className="form-control bg-transparent border-primary  fw-normal text-white" />
                                                         <span className='text-danger'>{errors.newpassword}</span>
                                                     </div>
                                                     <p></p>
@@ -125,7 +122,7 @@ const Changepassword = () => {
                                                         <h6 className='text-orange'>Re Enter Password:</h6>
                                                     </div>
                                                     <div className='col-sm-9'>
-                                                        <input type="text" name='confirmpassword' autoComplete='off' placeholder='Re Enter password' onChange={handleChange} className="form-control bg-transparent border-primary  fw-normal text-white" />
+                                                        <input type="text" name='confirmpassword' autoComplete='off' value={values.confirmpassword}  placeholder='Re Enter password' onChange={handleChange} className="form-control bg-transparent border-primary  fw-normal text-white" />
                                                         <span className='text-danger'>{errors.confirmpassword}</span>
                                                     </div>
                                                 </div>

@@ -37,27 +37,11 @@ export const UserStates = (props) => {
     }, [])
 
     //Sign up
-    const createUser = async (username, address, email, ph, password, cpassword,userphoto) => {
-        const formData = new FormData();
-        formData.append('userphoto', userphoto);
-        formData.append('username', username);
-        formData.append('address', address);
-        formData.append('ph', ph);
-        formData.append('password', password);
-        formData.append('cpassword', cpassword);
-        formData.append('email', email);
+    const createUser = async (username,  email,  password, cpassword) => {
 
-        const response = await getRegisterApi('/api/auth/createuser', 'POST', formData, "");
+        const response = await getApi('/api/auth/createuser', 'POST', { username:username, email: email, password: password, cpassword:cpassword }, "");
         return response;
       
-
-        
-        // axios.post('http://localhost:5000/api/auth/createuser',formData).then(res => {
-        //     return res;
-        //  })
-        //  .catch(err => {
-        //     console.log(err);
-        //  });
     }
 
     //Login 
@@ -78,18 +62,20 @@ export const UserStates = (props) => {
         return response;
     }
 
-     //Update user contact  data
-     const updateContactdetails = async(data)=>{
-        const  response = await getApi('/api/auth/updatecontactdetails','PUT',data,localStorage.getItem('token'));
+     //Change profile picture
+     const changeprofilepic = async(data)=>{
+        const formData = new FormData();
+        formData.append('userphoto', data.userphoto);
+        const response = await getRegisterApi('/api/auth/changeprofilepic', 'POST', formData, localStorage.getItem('token'));
         return response;
     }
 
-    //Check user current password
-    const checkCurrentpassword = async (data)=>{
-        const response = await getApi('/api/auth/checkcurrentpassword','POST',data,localStorage.getItem('token'));
+    //Change password
+    const changePassword = async (data)=>{
+        const response = await getApi('/api/auth/changepassword','POST',data,localStorage.getItem('token'));
         return response;
     }
-    return <UserAuthContext.Provider value={{ createUser, login, getUser, updateBasicdetails, updateContactdetails, checkCurrentpassword }}>
+    return <UserAuthContext.Provider value={{ createUser, login, getUser, updateBasicdetails, changeprofilepic, changePassword }}>
         {props.children}
     </UserAuthContext.Provider>
 }

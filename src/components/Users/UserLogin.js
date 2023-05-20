@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 import * as Yup from 'yup';
 import YupPassword from 'yup-password';
-import logo from '../../image/gpartworklogo.png';
+import logo from '../../image/dibujo.png';
 import { Formik, Form as Form1 } from 'formik';
 import Commonmodalform from './Commonmodalform';
 import { useRef } from 'react';
 import { UserAuthContext } from '../../context/UserAuthContext';
 import swal from 'sweetalert';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { actionCreators } from '../../states';
 
@@ -15,10 +15,13 @@ YupPassword(Yup);
 
 const UserLogin = () => {
     const dispatch = useDispatch();
-    const {Login} = bindActionCreators(actionCreators,dispatch);
+    const { Login } = bindActionCreators(actionCreators, dispatch);
     const [submitText, setSubmitText] = useState({ text: "Submit", disable: "", icon: "fa fa-paint-brush" });
     const context = useContext(UserAuthContext);
     const { login, getUser } = context;
+    var loginwithoutOrder = useSelector(state=>state.loginwithoutOrder);
+    
+
     const inputs = [
         {
             key: 1,
@@ -45,6 +48,7 @@ const UserLogin = () => {
     ]
 
     const ref = useRef();
+    const serviceref = useRef();
     const closeLogin = () => {
         ref.current.click()
     }
@@ -66,27 +70,34 @@ const UserLogin = () => {
     }
 
 
-    const handleSubmit = async (data,action) => {
+    const handleSubmit = async (data, action) => {
+       
         try {
             setSubmitText({ text: "Please wait", disable: "disabled", icon: "fa fa-spinner fa-spin" });
             const response = await login(data.uname, data.pw);
-            
+
             if (response.status) {
-                showAlert("success", "You are successfully Logged In", "", "Close");
+
                 ref.current.click();
-                localStorage.setItem('token',response.authtoken);
+                localStorage.setItem('token', response.authtoken);
                 const res = await getUser();
-                if(res.status){
-                    Login(res); 
+                if (res.status) {
+                    Login(res);
                     action.resetForm({
-                        values:{uname: "", pw: ""}
-                    })  
+                        values: { uname: "", pw: "" }
+                    })
+
+                    
+                    (loginwithoutOrder.status?
+                    serviceref.current.click():"")
+                    
+   
                 }
-                else{
+                else {
                     var error = res.error;
                     showAlert("error", "Error !!", error.toString(), "Close");
                     setSubmitText({ text: "Submit", disable: "", icon: "fa fa-paint-brush" });
-                }        
+                }
             }
 
             else {
@@ -111,10 +122,12 @@ const UserLogin = () => {
             <button type="button" style={{ display: "none" }} className="btn btn-primary" data-bs-toggle="modal" data-bs-target="loginModal">
                 Launch demo modal
             </button>
+
+            <a data-bs-toggle="modal" style={{ display: "none" }} data-bs-target="#serviceModal" ref={serviceref} className="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft text-dark fw-bold ">Order now</a>
             <div className='row justify-content-md-center'>
                 <div className='col-lg-12'>
                     <div className="modal fade" id="loginModal" tabIndex="-1" data-bs-backdrop="static">
-                        <div className="modal-dialog " style={{ maxWidth: "450px" }}>
+                        <div className="modal-dialog " style={{ maxWidth: "400px" }}>
                             <div className="modal-content bg-dark-blue shadow-sm">
                                 <div className="modal-header my-0">
                                     <button className='btn btn-success btn-small rounded text-white' data-bs-dismiss="modal" aria-label="Close" ref={ref}><i className='fa fa-arrow-left'></i></button>
@@ -123,7 +136,7 @@ const UserLogin = () => {
                                             <small className='text-light fw-normal fs-6' data-bs-toggle="modal" data-bs-target="#signupModal">New User?Sign up</small>
                                         </div>
                                     </h3>
-                                    <img className='shadow-lg rounded-circle' src={logo} width="60" alt="Logo" height="50" />
+                                    <img src={logo} width="60" alt="Logo" height="50" />
                                 </div>
 
                                 <Formik initialValues={{ uname: "", pw: "" }} validationSchema={validation} onSubmit={handleSubmit}>
@@ -139,7 +152,7 @@ const UserLogin = () => {
 
                                             </div>
 
-                                            <div className='text-center'>
+                                            <div className='text-center mt-2'>
                                                 <button type='submit' className={`${submitText.disable} btn  btn-primary text-dark fw-bold`}>{submitText.text} <span className={`${submitText.icon} text-light`}></span></button>
                                             </div>
 

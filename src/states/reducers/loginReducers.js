@@ -1,3 +1,4 @@
+
 const loginDetails = { status: false, id: "", name: "", ph: "",userphoto:"", userstatus:"",role:0,address:"",email:"" };
 const loginReducers = (state = loginDetails, action) => {
     if (action.type === 'login') {
@@ -33,6 +34,7 @@ const loginReducers = (state = loginDetails, action) => {
 
     else if (action.type === 'logout') {
         localStorage.removeItem('token');
+       
         return {
             ...state,
             status: false,

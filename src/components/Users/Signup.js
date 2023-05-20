@@ -1,5 +1,5 @@
 import React, { useContext, useRef, useState } from 'react';
-import logo from '../../image/gpartworklogo.png';
+import logo from '../../image/dibujo.png';
 import Commonmodalform from './Commonmodalform';
 import { Formik, Form as Form1 } from 'formik';
 import * as Yup from 'yup';
@@ -16,8 +16,7 @@ YupPassword(Yup);
 const Signup = () => {
 
   const [submitText, setSubmitText] = useState({ text: "Submit", disable: "", icon: "fa fa-paint-brush" });
-  const [file, setFile] = useState("");
-  const [userphoto, setUserphoto] = useState("");
+
 
   const context = useContext(UserAuthContext);
   const { createUser, getUser } = context;
@@ -40,18 +39,6 @@ const Signup = () => {
 
       },
       {
-        key: 2,
-        name: "address",
-        required: "true",
-        autoComplete: "off",
-        type: "text",
-        placeholder: "Enter your address......",
-        className: "form-control bg-transparent border-primary  fw-normal p-3 text-white hideme",
-        label: "Address",
-        id: "floatingInput2",
-
-      },
-      {
         key: 3,
         name: "email",
         required: "true",
@@ -61,18 +48,6 @@ const Signup = () => {
         className: "form-control bg-transparent border-primary  fw-normal p-3 text-white",
         label: "Email ID",
         id: "floatingInput3",
-
-      },
-      {
-        key: 4,
-        name: "ph",
-        required: "true",
-        autoComplete: "off",
-        type: "number",
-        placeholder: "Enter your Phone number......",
-        className: "form-control bg-transparent border-primary  fw-normal p-3 text-white",
-        label: "Ph No",
-        id: "floatingInput4",
 
       },
       {
@@ -104,8 +79,6 @@ const Signup = () => {
     const validation = Yup.object({
       username: Yup.string().required('Please enter your name !!').max(100, 'Maximum character is 100 !!').min(3, 'Minimum character is 3 !!').matches(/^[aA-zZ\s]+$/, "Only alphabets are allowed for this field !!"),
       email: Yup.string().required('Please enter your email ID !!').email('Invalid email ID !!').max(100, 'Maximum character is 100'),
-      address: Yup.string().required('Please enter address !!').max(100, "Maximum character is 100"),
-      ph: Yup.string().required('Please enter your phone number').max(10, "Phone number cannot be more than 10 digits !!").min(10, "Phone number cannot be less than 10 digits !!"),
       password: Yup.string().required('Please enter password !!').max(14, 'Maximum character is 14 !!').min(8, 'Minimum character is 8').minLowercase(1, 'Need atleast one lowercase letter').minUppercase(1, 'Need atleast one uppercase letter').minSymbols(1, 'Need atleast one special character').minNumbers(1, 'Need atleast one number'),
       cpassword: Yup.string().required('Please re enter password !!').oneOf([Yup.ref("password"), null], "Password doesnot matched !!"),
 
@@ -122,36 +95,36 @@ const Signup = () => {
       });
     }
 
-    const fileupload = (e) => {
-      var filetype = e.target.files[0].name.split('.').pop();
-      if (filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png' || filetype === 'JPG' || filetype === 'JPEG' || filetype === 'PNG') {
-        setFile(URL.createObjectURL(e.target.files[0]));
-        setUserphoto(e.target.files[0]);
-      }
-      else {
-        showAlert("error", "Error !", "Supported File JPEG, JPG and PNG only", "Close");
-        setFile("");
-        setUserphoto("");
-      }
-    }
+    // const fileupload = (e) => {
+    //   var filetype = e.target.files[0].name.split('.').pop();
+    //   if (filetype === 'jpg' || filetype === 'jpeg' || filetype === 'png' || filetype === 'JPG' || filetype === 'JPEG' || filetype === 'PNG') {
+    //     setFile(URL.createObjectURL(e.target.files[0]));
+    //     setUserphoto(e.target.files[0]);
+    //   }
+    //   else {
+    //     showAlert("error", "Error !", "Supported File JPEG, JPG and PNG only", "Close");
+    //     setFile("");
+    //     setUserphoto("");
+    //   }
+    // }
 
     const handleSubmit = async (data, actions) => {
-
+      
       try {
         setSubmitText({ text: "Please wait", disable: "disabled", icon: "fa fa-spinner fa-spin" })
-        const response = await createUser(data.username, data.address, data.email, data.ph, data.password, data.cpassword, userphoto);
+        const response = await createUser(data.username, data.email,  data.password, data.cpassword);
 
         if (response.status) {
-          showAlert("success", "Successfully Registered", "Thanks for being a part of GP Artwork", "Close");
-          setFile("");
-          setUserphoto("");
+          showAlert("success", "Successfully Registered", "Thanks for being a part of Dibujo", "Close");
+          // setFile("");
+          // setUserphoto("");
           ref.current.click();
           localStorage.setItem('token', response.authtoken);
           const res = await getUser();
           if (res.status) {
             Login(res);
             actions.resetForm({
-              values: { username: "", email: "", address: "", ph: "", password: "", cpassword: "" }
+              values: { username: "", email: "",  password: "", cpassword: "" }
             })
           }
           else {
@@ -187,7 +160,7 @@ const Signup = () => {
     return (
       <div>
         <div className="modal fade" id="signupModal" tabIndex="-1" data-bs-backdrop="static">
-          <div className="modal-dialog ">
+          <div className="modal-dialog " style={{maxWidth:"400px"}}>
             <div className="modal-content bg-dark-blue shadow-sm">
               <div className="modal-header my-0">
                 <button className='btn btn-success btn-small rounded text-white' data-bs-dismiss="modal" aria-label="Close" ref={ref}><i className='fa fa-arrow-left'></i></button>
@@ -196,33 +169,33 @@ const Signup = () => {
                     <small className='text-light fw-normal fs-6'>Already registered? Login</small>
                   </div>
                 </h3>
-                {file === "" ? <img className='shadow-lg rounded-circle' src={logo} width="60" alt="Logo" height="50" /> : <img className='shadow-lg rounded-circle' src={file} width="60" alt="Logo" height="50" />}
+               <img  src={logo} width="60" alt="Logo" height="50" /> 
 
               </div>
 
-              <Formik initialValues={{ username: "", email: "", address: "", ph: "", password: "", cpassword: "" }} validationSchema={validation} onSubmit={handleSubmit} >
-                <Form1 encType='multipart/form-data'>
+              <Formik initialValues={{ username: "", email: "",  password: "", cpassword: "" }} validationSchema={validation} onSubmit={handleSubmit} >
+                <Form1>
                   <div className="modal-body">
                     <div className='row'>
 
                       {
                         inputs.map((input) => {
-                          return <div className="col-sm-6" key={input.key} ><Commonmodalform key={input.key}  {...input} /> </div>
+                          return <div className="col-sm-12" key={input.key} ><Commonmodalform key={input.key}  {...input} /> </div>
                         })
                       }
 
                     </div>
 
 
-                    <div className='row mb-2'>
+                    {/* <div className='row mb-2'>
                       <div className='col-sm-12'>
                         <label className='text-small text-danger mb-1'>Choose Profile Picture (Optional)</label>
                         <div className='text-center'>
                           <input type="file" className='form-control bg-dark fileinput' onChange={fileupload} />
                         </div>
                       </div>
-                    </div>
-                    <div className='card bg-success mb-2'>
+                    </div> */}
+                    {/* <div className='card bg-success mb-2'>
                       <div className='card-body content-align-justify p-0'>
                         <small className='text-dark fw-bold mx-1'>Note :</small><br />
                         <ul className='text-white fw-normal'>
@@ -231,11 +204,11 @@ const Signup = () => {
                           <li><small>File supported : JPEG, PNG</small></li>
                         </ul>
                       </div>
-                    </div>
+                    </div> */}
 
                     <div id="recaptcha-container"></div>
 
-                    <div className='text-center'>
+                    <div className='text-center mt-2'>
                       <button type='submit' className={`${submitText.disable} btn  btn-primary text-dark fw-bold`}>{submitText.text} <span className={`${submitText.icon} text-light`}></span></button>
                     </div>
 
